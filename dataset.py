@@ -34,7 +34,14 @@ class Dataset:
     def __str__(self):
         return '\n'.join(str(photo) for photo in self.photos)
 
+    def n_unique_tags(self):
+        return len(set.union(*(photo.tags for photo in self.photos)))
 
 if __name__=="__main__":
-    ds = Dataset("inputs/a_example.txt")
-    print(ds)
+    print(Dataset("inputs/a_example.txt").n_unique_tags())
+    print(Dataset("inputs/b_lovely_landscapes.txt").n_unique_tags())
+    #print(Dataset("inputs/c_memorable_moments.txt").n_unique_tags())
+    print(Dataset("inputs/d_pet_pictures.txt").n_unique_tags())
+    print(Dataset("inputs/e_shiny_selfies.txt").n_unique_tags())
+
+
