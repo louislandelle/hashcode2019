@@ -30,12 +30,20 @@ class Dataset:
     def __init__(self, input_fpath):
         self.length, lines = parse(input_fpath)
         self.photos = [Photo(line) for line in lines]
+        self._h_photos = [p for p in self.photos if p.orientation == 'H']
+        self._v_photos = [p for p in self.photos if p.orientation == 'V']
     
     def __str__(self):
         return '\n'.join(str(photo) for photo in self.photos)
 
     def n_unique_tags(self):
         return len(set.union(*(photo.tags for photo in self.photos)))
+
+    def h_photos(self):
+        return self._h_photos
+    
+    def v_photos(self):
+        return self._v_photos
 
 if __name__=="__main__":
     print(Dataset("inputs/a_example.txt").n_unique_tags())
